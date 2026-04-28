@@ -1,0 +1,13 @@
+services:
+  spotify-listening:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPOTIPY_CLIENT_ID: "${SPOTIPY_CLIENT_ID}"
+      SPOTIPY_CLIENT_SECRET: "${SPOTIPY_CLIENT_SECRET}"
+      SPOTIPY_CACHE_PATH: "/.cache"
+      REDIRECT_URI: "${REDIRECT_URI:-http://localhost:8080/callback}"
+    volumes:
+      - ./.cache:/.cache
+    restart: unless-stopped
